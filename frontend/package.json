@@ -11,16 +11,21 @@
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.7",
+    "@react-three/fiber": "^9.4.0",
+    "@react-three/postprocessing": "^3.0.4",
     "@tabler/icons-react": "^3.35.0",
     "axios": "^1.12.2",
     "clsx": "^2.1.1",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
+    "ogl": "^1.0.11",
+    "postprocessing": "^6.37.8",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.9.4",
     "tailwind-merge": "^3.3.1",
+    "three": "^0.180.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

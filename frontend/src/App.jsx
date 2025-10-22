@@ -14,6 +14,7 @@ import SignupFormNew from "./pages/SignupFormNew";
 import LoginPageNew from "./pages/LoginPageNew";
 import Navbarnew from "./components/Navbarnew";
 import Trial from "./components/trial";
+import Trial2 from "./components/trial2";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -40,6 +41,7 @@ const App = () => {
           element={authUser ? <HomePage /> : <Navigate to="/loginnew" />}
         />
         <Route path="/trial" element={<Trial />} />
+        <Route path="/trial2" element={<Trial2 />} />
         <Route
           path="/signup"
           element={!authUser ? <SingnUpPage /> : <Navigate to="/" />}
