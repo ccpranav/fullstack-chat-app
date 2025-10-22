@@ -26,21 +26,18 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
-    if (newUser) {
-      //generate JWT Token
-      genToken(newUser._id, res);
-      await newUser.save();
+    await newUser.save();
+    //generate JWT Token
+    genToken(newUser._id, res);
 
-      res.status(201).json({
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        email: newUser.email,
-        profilePic: newUser.profilePic,
-      });
-    } else {
-      res.status(400).json({ message: "Invalid User data" });
-    }
+    res.status(201).json({
+      _id: newUser._id,
+      fullName: newUser.fullName,
+      email: newUser.email,
+      profilePic: newUser.profilePic,
+    });
   } catch (e) {
+    console.error("Signup Error:", e);
     res.status(500).json({ message: `Internal Server Error + ${e}` });
   }
 };
@@ -68,6 +65,7 @@ export const login = async (req, res) => {
       profilePic: user.profilePic,
     });
   } catch (e) {
+    console.error("Login Error:", e);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
@@ -75,8 +73,9 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
-    res.status(200).json({ message: "Logged out successfully" });
+    return res.status(200).json({ message: "Logged out successfully" });
   } catch (e) {
+    console.error("Logout Error:", e);
     res.status(500).json({ message: "Logout Error" });
   }
 };
@@ -87,7 +86,7 @@ export const updateProfile = async (req, res) => {
     const userID = req.user._id;
 
     if (!profilePic) {
-      res.status(400).json({ message: "Profile Pic is required" });
+      return res.status(400).json({ message: "Profile Pic is required" });
     }
 
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
@@ -99,16 +98,16 @@ export const updateProfile = async (req, res) => {
 
     return res.status(200).json(updatedUser);
   } catch (e) {
-    console.log("Error in update profile", e);
+    console.error("Error in updateProfile:", e);
     res.status(500).json({ message: `Internal Server Error ${e}` });
   }
 };
 
 export const checkAuth = async (req, res) => {
   try {
-    res.status(200).json(req.user);
+    return res.status(200).json(req.user);
   } catch (e) {
-    console.log("Error in checkAuth controller: ", e.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error in checkAuth controller: ", e);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
