@@ -5,7 +5,7 @@ const trial2 = () => {
   const navbarHeight = 50; // your navbar height in px
 
   return (
-    <div style={{ pointerEvents: "auto" }}>
+    <div style={{ height: "100vh", overflow: "hidden", position: "relative",pointerEvents: "auto" }}>
       <header
         style={{
           position: "fixed",
@@ -22,15 +22,21 @@ const trial2 = () => {
 
       <div
         style={{
-          position: "fixed",
-          //   top: `${navbarHeight}px`, // start below navbar
+          // position: "fixed",
+          // //   top: `${navbarHeight}px`, // start below navbar
+          // left: 0,
+          // width: "100%",
+          // //   height: `calc(100vh - ${navbarHeight}px)`, // fill rest of screen
+          // height: "100vh",
+          // overflow: "hidden",
+          // zIndex: 0,
+          // pointerEvents: "auto", // Enable pointer events for the Dither component
+          position: "absolute",
+          top: 0,
           left: 0,
           width: "100%",
-          //   height: `calc(100vh - ${navbarHeight}px)`, // fill rest of screen
-          height: "100vh",
-          overflow: "hidden",
+          height: "100%",
           zIndex: 0,
-          pointerEvents: "auto", // Enable pointer events for the Dither component
         }}
       >
         <Dither
@@ -47,13 +53,15 @@ const trial2 = () => {
 
       <main
         style={{
-          position: "relative",
-          zIndex: 10,
-          paddingTop: `${navbarHeight}px`,
+          position: "absolute",
+          top: `${navbarHeight}px`,
+          left: 0,
+          width: "100%",
+          height: `calc(100vh - ${navbarHeight}px)`,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          minHeight: "50vh", // Reduced from 100vh to push form up
+          zIndex: 10,
         }}
       >
         {/* Your page content */}
