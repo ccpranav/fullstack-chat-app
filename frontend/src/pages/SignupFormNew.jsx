@@ -52,9 +52,9 @@ export default function SignupFormDemo() {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-black px-4 md:px-0">
-      {/* Centered dark container */}
-      <div className="w-full max-w-md rounded-2xl bg-black p-8 shadow-lg">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center pointer-events-none px-4 md:px-0">
+      {/* Inner form box is interactive */}
+      <div className="w-full max-w-md rounded-2xl bg-black p-8 shadow-lg pointer-events-auto">
         <h2 className="text-2xl font-bold text-white text-center">
           Welcome to CharLando
         </h2>
@@ -193,7 +193,7 @@ const LabelInputContainer = ({ children, className }) => (
 
 const SocialButton = ({ icon: Icon, text }) => (
   <button
-    className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-800 px-4 font-medium text-white shadow hover:bg-gray-700 transition"
+    className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-800 px-4 font-medium text-white shadow hover:bg-gray-700 transition pointer-events-auto"
     type="button"
   >
     <Icon className="h-4 w-4 text-gray-300" />

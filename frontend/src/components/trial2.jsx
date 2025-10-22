@@ -1,12 +1,11 @@
 import React from "react";
 import Dither from "./ui/Dither";
 import SignupFormNew from "../pages/SignupFormNew";
-
 const trial2 = () => {
   const navbarHeight = 50; // your navbar height in px
 
   return (
-    <>
+    <div style={{ pointerEvents: "auto" }}>
       <header
         style={{
           position: "fixed",
@@ -31,6 +30,7 @@ const trial2 = () => {
           height: "100vh",
           overflow: "hidden",
           zIndex: 0,
+          pointerEvents: "auto", // Enable pointer events for the Dither component
         }}
       >
         <Dither
@@ -50,12 +50,18 @@ const trial2 = () => {
           position: "relative",
           zIndex: 10,
           paddingTop: `${navbarHeight}px`,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "50vh", // Reduced from 100vh to push form up
         }}
       >
         {/* Your page content */}
-        <SignupFormNew />
+        <div style={{ transform: "translateY(-5vh)" }}>
+          <SignupFormNew />
+        </div>
       </main>
-    </>
+    </div>
   );
 };
 
