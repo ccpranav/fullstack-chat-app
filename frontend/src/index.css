@@ -9,3 +9,28 @@
       0px 0px 0px 1px rgba(25, 28, 33, 0.08);
   }
 }
+
+.typewriter-cursor {
+  height: 1.2em !important; /* reduces cursor height */
+}
+
+.typewriter-word + .typewriter-word {
+  margin-left: 0.5rem !important; /* adds space between words */
+}
+
+@theme inline {
+  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1
+    var(--delay, 0ms);
+
+  @keyframes cell-ripple {
+    0% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0.4;
+    }
+  }
+}
