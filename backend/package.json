@@ -6,10 +6,10 @@
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Pranav",
   "type": "module",
   "license": "ISC",
-  "description": "",
+  "description": "Chat App",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",

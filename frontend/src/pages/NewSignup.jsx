@@ -3,72 +3,116 @@ import React, { useState } from "react";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { LoaderOne } from "../components/ui/loader";
-import { TypewriterEffect } from "../components/ui/typewriter-effect";
-// import TypewriterEffectDemo from "../components/typing";
-
 import { cn } from "../lib/utils";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
-} from "@tabler/icons-react";
-import { Eye, EyeOff, Loader2, Mail, MessageSquare, Lock } from "lucide-react";
-import { Link } from "react-router-dom";
-import AuthImagePattern from "../components/AuthImagePattern";
+import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+import { Eye, EyeOff } from "lucide-react";
+import toast from "react-hot-toast";
 import { useAuthStore } from "../store/useAuthStore";
+import { Link } from "react-router-dom";
+import Dither from "../components/ui/Dither";
 
-export default function LoginPage() {
+export default function SignupFormDemo() {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({ email: "", password: "" });
   const [focusedField, setFocusedField] = useState(null);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
 
-  const { login, isLoggingIn } = useAuthStore();
+  const { signUp, isSigningUp } = useAuthStore();
+
+  const validateForm = () => {
+    if (!formData.firstName.trim())
+      return toast.error("First name is required");
+    if (!formData.lastName.trim()) return toast.error("Last name is required");
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email))
+      return toast.error("Invalid email format");
+    if (!formData.password) return toast.error("Password is required");
+    if (formData.password.length < 6)
+      return toast.error("Password must be at least 6 characters");
+    return true;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(formData);
+    const fullName =
+      `${formData.firstName.trim()} ${formData.lastName.trim()}`.trim();
+
+    const success = validateForm();
+    if (success === true) {
+      signUp({
+        fullName,
+        email: formData.email,
+        password: formData.password,
+      });
+    }
   };
 
-  const words = [
-    {
-      text: "Welcome",
-      className: "text-white",
-    },
-    {
-      text: "Back",
-      className: "text-white",
-    },
-    {
-      text: "Mate !",
-      className: "text-blue-500 dark:text-blue-500",
-    },
-  ];
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
-      {/* left side */}
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* Interactive Background */}
+      <Dither
+        waveColor={[0.5, 0.5, 0.5]}
+        disableAnimation={false}
+        enableMouseInteraction={true}
+        mouseRadius={0.3}
+        colorNum={4}
+        waveAmplitude={0.3}
+        waveFrequency={3}
+        waveSpeed={0.05}
+      />
 
-      <div className="min-h-screen flex flex-col items-center justify-start bg-black pt-24 px-4 md:px-0">
-        {/* Centered dark container */}
-        <div className="w-full max-w-md rounded-2xl bg-black p-8 shadow-lg">
-          {/* <h2 className="text-2xl font-bold text-white text-center leading-tight px-4">
-            <TypewriterEffect
-              words={words}
-              className="!text-2xl !leading-tight"
-            />
-          </h2> */}
-          <h2 className="text-2xl font-bold text-white text-center leading-tight px-4">
-            <TypewriterEffect
-              words={words}
-              typingSpeed={70}
-              restartDelay={2500} // ⏳ Wait 2.5s before clearing & restarting
-            />
+      {/* Form Box */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-full max-w-md rounded-2xl bg-black p-8 shadow-lg pointer-events-auto transform -translate-y-6">
+          <h2 className="text-2xl font-bold text-white text-center">
+            Welcome to CharLando
           </h2>
-
           <p className="mt-2 text-center text-gray-400 text-sm">
-            Sign in to your account{" "}
+            Get started with your free account
           </p>
 
           <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+            <div className="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
+              <LabelInputContainer>
+                <Label htmlFor="firstname" className="text-gray-300">
+                  First name
+                </Label>
+                <Input
+                  id="firstname"
+                  placeholder={focusedField === "firstName" ? "" : "Michael"}
+                  onFocus={() => setFocusedField("firstName")}
+                  onBlur={() => setFocusedField(null)}
+                  type="text"
+                  value={formData.firstName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, firstName: e.target.value })
+                  }
+                  className="bg-gray-800 text-white border-gray-700 focus:border-blue-500"
+                />
+              </LabelInputContainer>
+              <LabelInputContainer>
+                <Label htmlFor="lastname" className="text-gray-300">
+                  Last name
+                </Label>
+                <Input
+                  id="lastname"
+                  placeholder={focusedField === "lastName" ? "" : "Jackson"}
+                  onFocus={() => setFocusedField("lastName")}
+                  onBlur={() => setFocusedField(null)}
+                  type="text"
+                  value={formData.lastName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, lastName: e.target.value })
+                  }
+                  className="bg-gray-800 text-white border-gray-700 focus:border-blue-500"
+                />
+              </LabelInputContainer>
+            </div>
+
             <LabelInputContainer>
               <Label htmlFor="email" className="text-gray-300">
                 Email Address
@@ -116,28 +160,17 @@ export default function LoginPage() {
               </div>
             </LabelInputContainer>
 
-            {/* <button
-            className="group/btn relative block h-10 w-full rounded-md bg-gray-700 text-white font-medium shadow hover:bg-gray-600 transition"
-            type="submit"
-            disabled={isSigningUp}
-          >
-            {isSigningUp ? (
-              <LoaderOne className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
-            ) : (
-              <> Sign up &rarr;</>
-            )}
-          </button> */}
             <button
               type="submit"
-              disabled={isLoggingIn}
+              disabled={isSigningUp}
               className="relative flex items-center justify-center h-10 w-full rounded-md bg-gray-700 text-white font-medium shadow hover:bg-gray-600 transition"
             >
-              {isLoggingIn ? (
+              {isSigningUp ? (
                 <div className="scale-50">
                   <LoaderOne className="text-white animate-pulse" />
                 </div>
               ) : (
-                <>Sign In &rarr;</>
+                <>Sign up &rarr;</>
               )}
             </button>
 
@@ -152,25 +185,20 @@ export default function LoginPage() {
               </Link>
             </div>
           </form>
+
           <div className="text-center mt-6">
             <p className="text-gray-400 text-sm">
-              Don’t have an account?{" "}
+              Already have an account?{" "}
               <Link
-                to="/signupnew"
+                to="/loginnew"
                 className="text-blue-400 hover:text-blue-300 hover:drop-shadow-[0_0_6px_rgba(59,130,246,0.6)] transition duration-300"
               >
-                Create one
+                Sign in
               </Link>
             </p>
           </div>
         </div>
       </div>
-
-      {/* right side */}
-      <AuthImagePattern
-        title="Join our community"
-        subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
-      />
     </div>
   );
 }
@@ -183,7 +211,7 @@ const LabelInputContainer = ({ children, className }) => (
 
 const SocialButton = ({ icon: Icon, text }) => (
   <button
-    className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-800 px-4 font-medium text-white shadow hover:bg-gray-700 transition"
+    className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-800 px-4 font-medium text-white shadow hover:bg-gray-700 transition pointer-events-auto"
     type="button"
   >
     <Icon className="h-4 w-4 text-gray-300" />

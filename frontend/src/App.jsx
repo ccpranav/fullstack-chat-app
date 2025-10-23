@@ -15,17 +15,16 @@ import ProfilePage from "./pages/ProfilePage";
 import { useAuthStore } from "./store/useAuthStore";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
-import SignupForm from "./components/new/SignupForm";
-import SignupFormNew from "./pages/SignupFormNew";
 import LoginPageNew from "./pages/LoginPageNew";
-import Navbarnew from "./components/Navbarnew";
-import Trial from "../../trash/trial";
-import Trial2 from "./components/trial2";
+import NewSignup from "./pages/NewSignup";
+import Mockery from "./pages/Mockery";
+import NotFound from "./pages/NotFound";
+import NewNav from "./components/NewNav";
 
 const Layout = () => {
   return (
     <>
-      <Navbar />
+      <NewNav />
       {/* Keep top spacing, but make page height fit perfectly */}
       <main className="pt-16 min-h-[calc(100vh-4rem)] overflow-hidden">
         <Outlet />
@@ -57,12 +56,6 @@ const App = () => {
             path="/"
             element={authUser ? <HomePage /> : <Navigate to="/loginnew" />}
           />
-          <Route path="/trial" element={<Trial />} />
-          <Route path="/trial2" element={<Trial2 />} />
-          <Route
-            path="/signup"
-            element={!authUser ? <SingnUpPage /> : <Navigate to="/" />}
-          />
           <Route
             path="/login"
             element={!authUser ? <LoginPage /> : <Navigate to="/" />}
@@ -72,16 +65,21 @@ const App = () => {
             element={!authUser ? <LoginPageNew /> : <Navigate to="/" />}
           />
           <Route
+            path="/signup"
+            element={!authUser ? <SingnUpPage /> : <Navigate to="/" />}
+          />
+          <Route
             path="/signupnew"
-            element={!authUser ? <SignupFormNew /> : <Navigate to="/" />}
+            element={!authUser ? <NewSignup /> : <Navigate to="/" />}
           />
           <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/test" element={<SignupForm />} />
+          <Route path="/givemoney" element={<Mockery />} />
           <Route
             path="/profile"
             element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
           />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
