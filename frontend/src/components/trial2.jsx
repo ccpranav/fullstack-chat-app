@@ -3,7 +3,7 @@ import Dither from "./ui/Dither";
 
 const trial2 = () => {
   return (
-    <div style={{ width: "100%", height: "600px", position: "relative" }}>
+    <div style={{ width: "100%", height: "100vh", position: "relative" }}>
       <Dither
         waveColor={[0.5, 0.5, 0.5]}
         disableAnimation={false}

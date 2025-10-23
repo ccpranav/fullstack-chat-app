@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
-import { Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SingnUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -15,6 +21,18 @@ import LoginPageNew from "./pages/LoginPageNew";
 import Navbarnew from "./components/Navbarnew";
 import Trial from "./components/trial";
 import Trial2 from "./components/trial2";
+
+const Layout = () => {
+  return (
+    <>
+      <Navbar />
+      {/* Apply pt-16 only when noPadding is false */}
+      <main className="pt-16">
+        <Outlet />
+      </main>
+    </>
+  );
+};
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -32,41 +50,45 @@ const App = () => {
       </div>
     );
   return (
-    <div>
+    <>
       <Toaster position="top-center" reverseOrder={false} />
-      {/* <Navbarnew /> */}
-      <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={authUser ? <HomePage /> : <Navigate to="/loginnew" />}
-        />
-        <Route path="/trial" element={<Trial />} />
-        <Route path="/trial2" element={<Trial2 />} />
-        <Route
-          path="/signup"
-          element={!authUser ? <SingnUpPage /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/signupnew"
-          element={!authUser ? <SignupFormNew /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/login"
-          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/loginnew"
-          element={!authUser ? <LoginPageNew /> : <Navigate to="/" />}
-        />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/test" element={<SignupForm />} />
-        <Route
-          path="/profile"
-          element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
-        />
+        <Route element={<Layout />}>
+          <Route
+            path="/"
+            element={authUser ? <HomePage /> : <Navigate to="/loginnew" />}
+          />
+          <Route path="/trial" element={<Trial />} />
+          <Route path="/trial2" element={<Trial2 />} />
+          <Route
+            path="/signup"
+            element={!authUser ? <SingnUpPage /> : <Navigate to="/" />}
+          />
+
+          <Route
+            path="/login"
+            element={!authUser ? <LoginPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/loginnew"
+            element={!authUser ? <LoginPageNew /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/signupnew"
+            element={!authUser ? <SignupFormNew /> : <Navigate to="/" />}
+          />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/test" element={<SignupForm />} />
+          <Route
+            path="/profile"
+            element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
+          />
+        </Route>
+        {/* <Route element={<Layout noPadding={true} />}>
+          
+        </Route> */}
       </Routes>
-    </div>
+    </>
   );
 };
 
