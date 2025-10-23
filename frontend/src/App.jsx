@@ -19,15 +19,15 @@ import SignupForm from "./components/new/SignupForm";
 import SignupFormNew from "./pages/SignupFormNew";
 import LoginPageNew from "./pages/LoginPageNew";
 import Navbarnew from "./components/Navbarnew";
-import Trial from "./components/trial";
+import Trial from "../../trash/trial";
 import Trial2 from "./components/trial2";
 
 const Layout = () => {
   return (
     <>
       <Navbar />
-      {/* Apply pt-16 only when noPadding is false */}
-      <main className="pt-16">
+      {/* Keep top spacing, but make page height fit perfectly */}
+      <main className="pt-16 min-h-[calc(100vh-4rem)] overflow-hidden">
         <Outlet />
       </main>
     </>
@@ -41,14 +41,13 @@ const App = () => {
     checkAuth();
   }, [checkAuth]);
 
-  // console.log("Consoling...", authUser);
-
   if (isCheckingAuth && !authUser)
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader className="size-10 animate-spin" />
       </div>
     );
+
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
@@ -64,7 +63,6 @@ const App = () => {
             path="/signup"
             element={!authUser ? <SingnUpPage /> : <Navigate to="/" />}
           />
-
           <Route
             path="/login"
             element={!authUser ? <LoginPage /> : <Navigate to="/" />}
@@ -84,9 +82,6 @@ const App = () => {
             element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
           />
         </Route>
-        {/* <Route element={<Layout noPadding={true} />}>
-          
-        </Route> */}
       </Routes>
     </>
   );

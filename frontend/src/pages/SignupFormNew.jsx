@@ -52,7 +52,7 @@ export default function SignupFormDemo() {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center pointer-events-none px-4 md:px-0">
+    <div className="flex min-h-screen w-full flex-col items-center bg-black justify-center pointer-events-none px-4 md:px-0">
       {/* Inner form box is interactive */}
       <div className="w-full max-w-md rounded-2xl bg-black p-8 shadow-lg pointer-events-auto">
         <h2 className="text-2xl font-bold text-white text-center">
