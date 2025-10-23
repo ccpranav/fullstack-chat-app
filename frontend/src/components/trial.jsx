@@ -1,5 +1,5 @@
 import React from "react";
-import GradientBlinds from "./ui/galaxy";
+// import GradientBlinds from "./ui/galaxy";
 
 const trial = () => {
   return (

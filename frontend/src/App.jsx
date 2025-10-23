@@ -34,7 +34,8 @@ const App = () => {
   return (
     <div>
       <Toaster position="top-center" reverseOrder={false} />
-      <Navbarnew />
+      {/* <Navbarnew /> */}
+      <Navbar />
       <Routes>
         <Route
           path="/"

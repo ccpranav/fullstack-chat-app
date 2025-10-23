@@ -4,7 +4,7 @@ import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { LoaderOne } from "../components/ui/loader";
 import { TypewriterEffect } from "../components/ui/typewriter-effect";
-import TypewriterEffectDemo from "../components/typing";
+// import TypewriterEffectDemo from "../components/typing";
 
 import { cn } from "../lib/utils";
 import {
