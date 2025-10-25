@@ -20,18 +20,19 @@ import NewSignup from "./pages/NewSignup";
 import Mockery from "./pages/Mockery";
 import NotFound from "./pages/NotFound";
 import NewNav from "./components/NewNav";
+import Header from "./components/Header";
 
-const Layout = () => {
-  return (
-    <>
-      <NewNav />
-      {/* Keep top spacing, but make page height fit perfectly */}
-      <main className="pt-16 min-h-[calc(100vh-4rem)] overflow-hidden">
-        <Outlet />
-      </main>
-    </>
-  );
-};
+// const Layout = () => {
+//   return (
+//     <>
+//       <NewNav />
+//       {/* Keep top spacing, but make page height fit perfectly */}
+//       <main className="pt-16 min-h-[calc(100vh-4rem)] overflow-hidden">
+//         <Outlet />
+//       </main>
+//     </>
+//   );
+// };
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -48,40 +49,40 @@ const App = () => {
     );
 
   return (
-    <>
+    <div>
       <Toaster position="top-center" reverseOrder={false} />
+      {/* <NewNav /> */}
+      <Header />
       <Routes>
-        <Route element={<Layout />}>
-          <Route
-            path="/"
-            element={authUser ? <HomePage /> : <Navigate to="/loginnew" />}
-          />
-          <Route
-            path="/login"
-            element={!authUser ? <LoginPage /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/loginnew"
-            element={!authUser ? <LoginPageNew /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/signup"
-            element={!authUser ? <SingnUpPage /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/signupnew"
-            element={!authUser ? <NewSignup /> : <Navigate to="/" />}
-          />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/givemoney" element={<Mockery />} />
-          <Route
-            path="/profile"
-            element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
-          />
-        </Route>
+        <Route
+          path="/"
+          element={authUser ? <HomePage /> : <Navigate to="/loginnew" />}
+        />
+        <Route
+          path="/login"
+          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/loginnew"
+          element={!authUser ? <LoginPageNew /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signup"
+          element={!authUser ? <SingnUpPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signupnew"
+          element={!authUser ? <NewSignup /> : <Navigate to="/" />}
+        />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/givemoney" element={<Mockery />} />
+        <Route
+          path="/profile"
+          element={authUser ? <ProfilePage /> : <Navigate to="/loginnew" />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </div>
   );
 };
 

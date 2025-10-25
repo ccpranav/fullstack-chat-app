@@ -52,7 +52,7 @@ export default function SignupFormDemo() {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen ">
       {/* Interactive Background */}
       <Dither
         waveColor={[0.5, 0.5, 0.5]}
@@ -67,7 +67,7 @@ export default function SignupFormDemo() {
 
       {/* Form Box */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-full max-w-md rounded-2xl bg-black p-8 shadow-lg pointer-events-auto transform -translate-y-6">
+        <div className="w-full max-w-md rounded-2xl bg-black p-8 shadow-lg pointer-events-auto transform ">
           <h2 className="text-2xl font-bold text-white text-center">
             Welcome to CharLando
           </h2>

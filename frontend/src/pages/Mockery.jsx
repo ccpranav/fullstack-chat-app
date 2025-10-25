@@ -50,7 +50,7 @@
 //     </div>
 //   );
 // }
-
+// bg-gradient-to-tr from-purple-800 via-pink-600 to-yellow-400
 "use client";
 import React from "react";
 import qrCode from "../assets/qr-code.jpeg"; // Replace with your QR
@@ -60,10 +60,10 @@ import meme3 from "../assets/meme-3.jpg";
 
 export default function MockeryPage() {
   return (
-    <div className="relative w-full min-h-screen bg-gradient-to-tr from-purple-800 via-pink-600 to-yellow-400 flex items-center justify-center overflow-hidden px-4">
+    <div className="relative w-full min-h-screen bg-black flex items-center justify-center overflow-hidden px-4">
       {/* Floating memes */}
       <img
-        className="absolute top-10 left-5 w-24 h-24 object-cover rounded-lg shadow-xl animate-spin-slow"
+        className="absolute top-20 left-5 w-24 h-24 object-cover rounded-lg shadow-xl animate-spin-slow"
         src={meme1}
         alt="meme1"
       />
@@ -79,7 +79,7 @@ export default function MockeryPage() {
       />
 
       {/* Main card */}
-      <div className="relative z-10 bg-black bg-opacity-80 backdrop-blur-xl rounded-3xl p-10 max-w-md text-center shadow-2xl space-y-6 border-4 border-pink-500 animate-fade-in -mt-10">
+      <div className="relative z-10 bg-purple-700 bg-opacity-80 backdrop-blur-xl rounded-3xl p-10 max-w-md text-center shadow-2xl space-y-6 border-4 border-pink-500 animate-fade-in mt-5">
         <h1 className="text-5xl font-extrabold text-yellow-300 animate-pulse">
           Oh, you want that feature huh? 😏
         </h1>

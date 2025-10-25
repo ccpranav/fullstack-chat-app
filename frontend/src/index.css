@@ -18,14 +18,14 @@
   margin-left: 0.5rem !important; /* adds space between words */
 }
 
-html,
+/* html,
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevents horizontal scroll */
-  overflow-y: hidden; /* Hides any vertical scrollbar caused by minor overflow */
+  overflow-x: hidden;
+  overflow-y: hidden; 
   height: 100%;
-}
+} */
 /* Removed debug outline that was causing overflow issues */
 
 /* html, body {
