@@ -49,6 +49,7 @@ export const sendMessage = async (req, res) => {
     }
 
     if (!image && !text) {
+      //T and F
       return res.status(400).json({ message: "Atleast 1 field required" });
     }
 
