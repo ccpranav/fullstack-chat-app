@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { useChatStore } from "../store/useChatStore";
 import MessageSkeleton from "./skeletons/MessageSkeleton";
 import ChatHeader from "./ChatHeader";
@@ -17,8 +17,11 @@ const ChatContainer = () => {
 
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
   };
+  useLayoutEffect(() => {
+    scrollToBottom();
+  }, []);
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -34,7 +37,7 @@ const ChatContainer = () => {
   return (
     <div className="flex-1 flex flex-col overflow-y-auto">
       <ChatHeader />
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 flex flex-col overflow-y-auto p-4 space-y-4">
         {messages.map((message) => (
           <div
             key={message._id}
