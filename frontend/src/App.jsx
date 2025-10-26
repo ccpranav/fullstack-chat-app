@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "../../trash/Navbar";
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,7 +19,6 @@ import LoginPageNew from "./pages/LoginPageNew";
 import NewSignup from "./pages/NewSignup";
 import Mockery from "./pages/Mockery";
 import NotFound from "./pages/NotFound";
-import NewNav from "./components/NewNav";
 import Header from "./components/Header";
 
 // const Layout = () => {

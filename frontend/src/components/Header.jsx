@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { WordmarkIcon } from "./Logo";
+import { WordmarkIcon } from "../../../trash/Logo";
 import { MenuToggleIcon } from "./MenuToggleIcon";
 import { Button, buttonVariants } from "./ui/Button";
 import useScroll from "../hooks/useScroll";
@@ -34,23 +34,24 @@ export default function Header() {
       )}
     >
       <nav className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4">
-        <div className="rounded-md p-2 hover:bg-gray-800 transition">
+        <div className="flex items-center gap-2 rounded-md p-2 transition-transform duration-200 hover:scale-105">
           {/* <WordmarkIcon className="h-4" /> */}
           <Link to="/">
-            <img
-              src={logo}
-              alt="Logo"
-              className="h-6 w-auto transition-transform duration-200 hover:scale-105"
-              loading="lazy"
-            />
+            <img src={logo} alt="Logo" className="h-6 w-auto " loading="lazy" />
           </Link>
+          <a href="/" className="text-white font-semibold ">
+            CharLando
+          </a>
         </div>
 
         {/* Desktop links */}
         <div className="hidden items-center gap-2 md:flex">
           {links.map((link, i) => (
             <a
-              className={buttonVariants({ variant: "ghost" })}
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "hover:bg-white/70 hover:text-black/70 transition-colors "
+              )}
               href={link.href}
               key={i}
             >
