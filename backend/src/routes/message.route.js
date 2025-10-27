@@ -4,6 +4,7 @@ import {
   getMessages,
   getUsersForSidebar,
   sendMessage,
+  startNewChat,
 } from "../controllers/message.controller.js";
 
 const router = express.Router();
@@ -12,5 +13,5 @@ router.get("/users", protectRoute, getUsersForSidebar);
 router.get("/:id", protectRoute, getMessages);
 
 router.post("/send/:id", protectRoute, sendMessage);
-
+router.post("/start-chat", protectRoute, startNewChat);
 export default router;

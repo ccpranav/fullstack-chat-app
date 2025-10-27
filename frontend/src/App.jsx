@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
   Outlet,
+  useLocation,
 } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
@@ -35,6 +36,7 @@ import Header from "./components/Header";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  const loacation = useLocation();
 
   useEffect(() => {
     checkAuth();
@@ -47,11 +49,12 @@ const App = () => {
       </div>
     );
 
+  const hideHeader = location.pathname === "/";
+
   return (
     <div>
       <Toaster position="top-center" reverseOrder={false} />
-      {/* <NewNav /> */}
-      <Header />
+      {!hideHeader && <Header />}
       <Routes>
         <Route
           path="/"

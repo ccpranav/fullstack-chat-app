@@ -9,6 +9,7 @@ export const useChatStore = create((set, get) => ({
   isUsersLoading: false,
   isMessagesLoading: false,
   isSendingMessage: false,
+  isStartingChat: false,
 
   getUsers: async () => {
     set({ isUsersLoading: true });
@@ -53,5 +54,30 @@ export const useChatStore = create((set, get) => ({
   //todo: optimize this function
   setSelectedUser: (selectedUser) => {
     set({ selectedUser, messages: [] });
+  },
+
+  startNewChat: async (email) => {
+    set({ isStartingChat: true });
+    try {
+      const res = await axiosInstance.post("/messages/start-chat", { email });
+
+      set({ selectedUser: res.data });
+    } catch (error) {
+      console.log("Error starting chat:", error);
+      toast.error(error.response?.data?.message || "Error starting chat");
+    } finally {
+      set({ isStartingChat: false });
+    }
+  },
+
+  resetChat: () => {
+    set({
+      messages: [],
+      users: [],
+      selectedUser: null,
+      isUsersLoading: false,
+      isMessagesLoading: false,
+      isSendingMessage: false,
+    });
   },
 }));

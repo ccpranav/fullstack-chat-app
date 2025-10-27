@@ -5,6 +5,7 @@ import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import { useAuthStore } from "../store/useAuthStore";
 import { formatMessageTime } from "../lib/utils";
+import { Link } from "react-router-dom";
 
 const ChatContainer = () => {
   const { selectedUser, messages, getMessages, isMessageLoading } =
@@ -45,7 +46,7 @@ const ChatContainer = () => {
               message.senderId === authUser._id ? "chat-end" : "chat-start"
             }`}
           >
-            <div className="chat-image avatar">
+            {/* <div className="chat-image avatar">
               <div className="size-10 rounded-full border">
                 <img
                   src={
@@ -60,7 +61,27 @@ const ChatContainer = () => {
                   }
                 />
               </div>
+            </div> */}
+            <div className="chat-image avatar">
+              <div className="size-10 rounded-full border overflow-hidden">
+                {message.senderId === authUser._id ? (
+                  <Link to="/profile">
+                    <img
+                      src={authUser.profilePic}
+                      alt={authUser.fullName}
+                      className="w-full h-full object-cover"
+                    />
+                  </Link>
+                ) : (
+                  <img
+                    src={selectedUser.profilePic}
+                    alt={selectedUser.fullName}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
             </div>
+
             <div className="chat-header mb-1">
               <time className="text-xs opacity-50">
                 {formatMessageTime(message.createdAt)}
