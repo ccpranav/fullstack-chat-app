@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Navbar from "../../trash/Navbar";
 import {
   BrowserRouter as Router,
   Routes,

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { WordmarkIcon } from "../../../trash/Logo";
 import { MenuToggleIcon } from "./MenuToggleIcon";
 import { Button, buttonVariants } from "./ui/Button";
 import useScroll from "../hooks/useScroll";
