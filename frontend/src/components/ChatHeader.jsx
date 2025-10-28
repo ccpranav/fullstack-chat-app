@@ -20,9 +20,17 @@ const ChatHeader = () => {
           {/* User info */}
           <div>
             <h3 className="font-medium">{selectedUser.fullName}</h3>
-            <p className="text-sm text-base-content/70">
-              {onlineUsers.includes(selectedUser._id) ? "Online" : "Offline"}
-            </p>
+            {selectedUser.email === "pc8210@srmist.edu.in" ? (
+              <p className="text-sm text-yellow-400 font-semibold">
+                {onlineUsers.includes(selectedUser._id)
+                  ? "CEO is Online"
+                  : "CEO is Offline"}
+              </p>
+            ) : (
+              <p className="text-sm text-base-content/70">
+                {onlineUsers.includes(selectedUser._id) ? "Online" : "Offline"}
+              </p>
+            )}
           </div>
         </div>
 

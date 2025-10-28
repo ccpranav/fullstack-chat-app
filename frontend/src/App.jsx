@@ -48,29 +48,29 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={authUser ? <HomePage /> : <Navigate to="/loginnew" />}
+          element={authUser ? <HomePage /> : <Navigate to="/login" />}
         />
         <Route
-          path="/login"
+          path="/loginold"
           element={!authUser ? <LoginPage /> : <Navigate to="/" />}
         />
         <Route
-          path="/loginnew"
+          path="/login"
           element={!authUser ? <LoginPageNew /> : <Navigate to="/" />}
         />
         <Route
-          path="/signup"
+          path="/signupold"
           element={!authUser ? <SingnUpPage /> : <Navigate to="/" />}
         />
         <Route
-          path="/signupnew"
+          path="/signup"
           element={!authUser ? <NewSignup /> : <Navigate to="/" />}
         />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/givemoney" element={<Mockery />} />
         <Route
           path="/profile"
-          element={authUser ? <ProfilePage /> : <Navigate to="/loginnew" />}
+          element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

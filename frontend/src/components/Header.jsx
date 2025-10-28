@@ -60,11 +60,11 @@ export default function Header() {
           ))}
           {!authUser ? (
             <>
-              <Link to={"/loginnew"}>
+              <Link to={"/login"}>
                 {" "}
                 <Button variant="outline">Sign In</Button>
               </Link>
-              <Link to={"/signupnew"}>
+              <Link to={"/signup"}>
                 <Button>Get Started</Button>
               </Link>
             </>
@@ -98,6 +98,7 @@ export default function Header() {
         <div className="grid gap-y-2">
           {links.map((link) => (
             <a
+              onClick={() => setOpen(false)}
               className={buttonVariants({
                 variant: "ghost",
                 className: "justify-start",
@@ -110,10 +111,20 @@ export default function Header() {
           ))}
         </div>
         <div className="flex flex-col gap-2">
-          <Button className="w-full bg-transparent" variant="outline">
-            Sign In
-          </Button>
-          <Button className="w-full">Get Started</Button>
+          <Link to={"/login"}>
+            <Button
+              className="w-full bg-transparent"
+              variant="outline"
+              onClick={() => setOpen(false)}
+            >
+              Sign In
+            </Button>
+          </Link>
+          <Link to={"/signup"}>
+            <Button className="w-full" onClick={() => setOpen(false)}>
+              Get Started
+            </Button>
+          </Link>
         </div>
       </MobileMenu>
     </header>
