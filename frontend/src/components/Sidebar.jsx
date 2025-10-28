@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
-import { Users } from "lucide-react";
+import { LogOutIcon, Users } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <aside className="h-full w-20 lg:w-96 border-r border-base-300 flex flex-col justify-between transition-all duration-200">
+      <aside className="h-full w-20 lg:w-[30rem] border-r border-base-300 flex flex-col justify-between transition-all duration-200">
         {/* Header */}
         <div>
           <div className="border-b border-base-300 w-full p-5">
@@ -41,7 +41,7 @@ const Sidebar = () => {
           </div>
 
           {/* Scrollable users list */}
-          <div className="overflow-y-auto w-full py-3 flex-1">
+          <div className="overflow-y-auto w-full py-3 pl-3 flex-1">
             {users.map((user) => (
               <button
                 key={user._id}
@@ -78,6 +78,8 @@ const Sidebar = () => {
         </div>
 
         {/* Fixed bottom Add Chat button */}
+        {/* Bottom section with Add Chat + Profile/Logout */}
+        {/* Bottom section with Add Chat + Profile/Logout */}
         <div className="border-t border-gray-700 p-3 space-y-3">
           {/* Add New Chat button */}
           <button
@@ -88,25 +90,38 @@ const Sidebar = () => {
             <span className="hidden lg:block">+ Add New Chat</span>
           </button>
 
-          {/* Profile + Logout */}
-          <div className="flex items-center justify-between bg-zinc-800 px-3 py-2 rounded-md">
-            <Link to={"/profile"}>
-              <div className="flex items-center gap-2">
-                <img
-                  src={useAuthStore.getState().authUser?.profilePic}
-                  alt="Profile"
-                  className="w-8 h-8 rounded-full object-cover"
-                />
-                <span className="hidden lg:block text-sm font-medium text-white truncate max-w-[100px]">
-                  {useAuthStore.getState().authUser?.fullName || "User"}
-                </span>
-              </div>
-            </Link>
+          {/* Profile + Logout section */}
+          {/* Profile + Logout section */}
+          <div className="flex justify-center">
+            {/* Large screens: Profile + Logout box */}
+            <div className="hidden lg:flex bg-zinc-800 px-3 py-2 rounded-md items-center justify-between w-full">
+              <Link to="/profile">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={useAuthStore.getState().authUser?.profilePic}
+                    alt="Profile"
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                  <span className="text-sm font-medium text-white truncate max-w-[100px]">
+                    {useAuthStore.getState().authUser?.fullName || "User"}
+                  </span>
+                </div>
+              </Link>
+              <button
+                onClick={() => useAuthStore.getState().logout()}
+                className="text-red-400 hover:text-red-500 text-sm font-medium"
+              >
+                Logout
+              </button>
+            </div>
+
+            {/* Small & medium screens: red logout icon button */}
             <button
               onClick={() => useAuthStore.getState().logout()}
-              className="text-red-400 hover:text-red-500 text-sm font-medium"
+              className="lg:hidden w-full bg-red-600 hover:bg-red-500 text-white py-2 rounded-md text-lg flex items-center justify-center"
+              title="Logout"
             >
-              Logout
+              <LogOutIcon size={22} />
             </button>
           </div>
         </div>

@@ -22,21 +22,11 @@ import Mockery from "./pages/Mockery";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 
-// const Layout = () => {
-//   return (
-//     <>
-//       <NewNav />
-//       {/* Keep top spacing, but make page height fit perfectly */}
-//       <main className="pt-16 min-h-[calc(100vh-4rem)] overflow-hidden">
-//         <Outlet />
-//       </main>
-//     </>
-//   );
-// };
-
 const App = () => {
-  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
   const loacation = useLocation();
+
+  console.log({ onlineUsers });
 
   useEffect(() => {
     checkAuth();

@@ -8,13 +8,27 @@ import { formatMessageTime } from "../lib/utils";
 import { Link } from "react-router-dom";
 
 const ChatContainer = () => {
-  const { selectedUser, messages, getMessages, isMessageLoading } =
-    useChatStore();
+  const {
+    selectedUser,
+    messages,
+    getMessages,
+    isMessageLoading,
+    subscribeToMessages,
+    unsubscribeFromMessages,
+  } = useChatStore();
   const { authUser } = useAuthStore();
 
   useEffect(() => {
     if (selectedUser?._id) getMessages(selectedUser._id);
-  }, [selectedUser?._id, getMessages]);
+    subscribeToMessages();
+
+    return () => unsubscribeFromMessages();
+  }, [
+    selectedUser?._id,
+    getMessages,
+    subscribeToMessages,
+    unsubscribeFromMessages,
+  ]);
 
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {

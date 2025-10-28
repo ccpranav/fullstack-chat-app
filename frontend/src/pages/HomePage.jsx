@@ -6,15 +6,12 @@ import ChatContainer from "../components/ChatContainer";
 
 const HomePage = () => {
   const { selectedUser } = useChatStore();
+
   return (
-    <div className="h-screen bg-black/65">
-      <div className="flex items-center justify-center pt-12 ">
-        <div className="bg-black rounded-lg shadow-cl w-full max-w-full h-[calc(100vh-3rem)]">
-          <div className="flex h-full rounded-lg overflow-hidden">
-            <Sidebar />
-            {!selectedUser ? <NoChatSelected /> : <ChatContainer />}
-          </div>
-        </div>
+    <div className="w-screen h-screen bg-black">
+      <div className="flex h-full w-full rounded-none overflow-hidden">
+        <Sidebar />
+        {!selectedUser ? <NoChatSelected /> : <ChatContainer />}
       </div>
     </div>
   );
