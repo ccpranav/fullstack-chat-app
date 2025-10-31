@@ -12,6 +12,8 @@
   "license": "ISC",
   "description": "Chat App",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.13.1",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",

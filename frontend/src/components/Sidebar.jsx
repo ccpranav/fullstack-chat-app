@@ -33,11 +33,38 @@ const Sidebar = () => {
       <aside className="h-full w-20 lg:w-[30rem] border-r border-base-300 flex flex-col justify-between transition-all duration-200">
         {/* Header */}
         <div>
-          <div className="border-b border-base-300 w-full p-5">
-            <div className="flex items-center gap-2">
+          <div className="border-b border-base-300 w-full p-5 space-y-2">
+            <div className="flex items-center gap-2 pl-3">
               <Users className="size-6" />
               <span className="font-medium hidden lg:block">Contacts</span>
             </div>
+            {/* AI Chat Section */}
+            <button
+              onClick={() =>
+                setSelectedUser({
+                  _id: "ai-chat",
+                  fullName: "AI Assistant",
+                  profilePic:
+                    "https://cdn-icons-png.flaticon.com/512/4712/4712027.png", // any AI icon
+                  isAI: true,
+                })
+              }
+              className={`w-full flex items-center gap-3 p-2 rounded-md hover:bg-base-300 transition-colors ${
+                selectedUser?._id === "ai-chat"
+                  ? "bg-base-300 ring-1 ring-base-300"
+                  : ""
+              }`}
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png"
+                alt="AI"
+                className="size-10 object-cover rounded-full"
+              />
+              <div className="hidden lg:block text-left">
+                <div className="font-medium truncate">AI Assistant</div>
+                <div className="text-sm text-zinc-400">Chat with AI</div>
+              </div>
+            </button>
           </div>
 
           {/* Scrollable users list */}
@@ -136,7 +163,7 @@ const Sidebar = () => {
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-80">
             <h2 className="text-lg font-semibold text-white mb-3">
-              Start New Chat
+              Start New Chatt
             </h2>
             <input
               type="email"

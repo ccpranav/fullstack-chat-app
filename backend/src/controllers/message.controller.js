@@ -42,6 +42,11 @@ export const getMessages = async (req, res) => {
     const { id: userToChatId } = req.params;
     const myId = req.user._id;
 
+    // 👇 Skip DB logic for AI Chat
+    if (userToChatId === "ai-chat") {
+      return res.status(200).json([]); // return empty messages initially
+    }
+
     const messages = await Message.find({
       $or: [
         { senderId: myId, receiverId: userToChatId },
@@ -61,6 +66,11 @@ export const sendMessage = async (req, res) => {
     const { text, image } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
+    if (receiverId === "ai-chat") {
+      return res
+        .status(200)
+        .json({ message: "AI messages handled client-side." });
+    }
 
     let imageUrl;
 

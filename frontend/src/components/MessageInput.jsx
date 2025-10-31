@@ -3,7 +3,7 @@ import { useChatStore } from "../store/useChatStore";
 import { Image, Loader2, Send, X } from "lucide-react";
 import toast from "react-hot-toast";
 
-const MessageInput = () => {
+const MessageInput = ({ onSend }) => {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
@@ -11,7 +11,7 @@ const MessageInput = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (!file.type.startsWith("image/")) {
+    if (!file?.type?.startsWith("image/")) {
       toast.error("Please select an image file.");
       return;
     }
@@ -29,13 +29,23 @@ const MessageInput = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!text && !imagePreview) return;
+    if (!text.trim() && !imagePreview) return;
+
     try {
-      await sendMessage({ text: text.trim(), image: imagePreview });
-      setText("");
-      removeImage();
+      // 👇 If AI chat, call the onSend function passed from ChatContainer
+      if (onSend) {
+        setText("");
+        removeImage();
+        await onSend(text.trim());
+      } else {
+        // 👇 Normal user-to-user chat
+        await sendMessage({ text: text.trim(), image: imagePreview });
+        setText("");
+        removeImage();
+      }
     } catch (error) {
-      console.error("Error in handleSendMessage: ", error);
+      console.error("Error in handleSendMessage:", error);
+      toast.error("Failed to send message.");
     }
   };
 
@@ -87,12 +97,13 @@ const MessageInput = () => {
             <Image size={20} />
           </button>
         </div>
+
         <button
           type="submit"
           className="btn btn-circle btn-sm sm:btn-md"
           disabled={isSendingMessage || (!text.trim() && !imagePreview)}
         >
-          {isSendingMessage && imagePreview ? (
+          {isSendingMessage && !onSend ? (
             <Loader2 size={20} className="animate-spin" />
           ) : (
             <Send size={20} />
