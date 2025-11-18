@@ -66,7 +66,7 @@ const App = () => {
           element={!authUser ? <NewSignup /> : <Navigate to="/" />}
         />
         <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/givemoney" element={<Mockery />} />
+        {/* <Route path="/givemoney" element={<Mockery />} /> */}
         <Route
           path="/profile"
           element={authUser ? <ProfilePage /> : <Navigate to="/login" />}

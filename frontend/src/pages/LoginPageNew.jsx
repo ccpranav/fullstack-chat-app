@@ -35,11 +35,11 @@ export default function LoginPage() {
       className: "text-white",
     },
     {
-      text: "Back",
+      text: "back",
       className: "text-white",
     },
     {
-      text: "Mate !",
+      text: "Mate!",
       className: "text-blue-500 dark:text-blue-500",
     },
   ];
@@ -49,7 +49,7 @@ export default function LoginPage() {
 
       <div className="min-h-screen flex flex-col items-center justify-start bg-black pt-24 px-4 md:px-0">
         {/* Centered dark container */}
-        <div className="w-full max-w-md rounded-2xl bg-black p-8 shadow-lg">
+        <div className="w-full max-w-md rounded-2xl bg-black p-8 mt-10 shadow-lg">
           {/* <h2 className="text-2xl font-bold text-white text-center leading-tight px-4">
             <TypewriterEffect
               words={words}
@@ -143,14 +143,14 @@ export default function LoginPage() {
 
             <div className="my-6 h-[1px] w-full bg-gray-700" />
 
-            <div className="flex flex-col space-y-3">
+            {/* <div className="flex flex-col space-y-3">
               <Link to={"/givemoney"}>
                 <SocialButton icon={IconBrandGithub} text="GitHub" />
               </Link>
               <Link to={"/givemoney"}>
                 <SocialButton icon={IconBrandGoogle} text="Google" />
               </Link>
-            </div>
+            </div> */}
           </form>
           <div className="text-center mt-6">
             <p className="text-gray-400 text-sm">

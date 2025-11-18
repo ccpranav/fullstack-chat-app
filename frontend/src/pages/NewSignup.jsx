@@ -176,14 +176,14 @@ export default function SignupFormDemo() {
 
             <div className="my-6 h-[1px] w-full bg-gray-700" />
 
-            <div className="flex flex-col space-y-3">
+            {/* <div className="flex flex-col space-y-3">
               <Link to={"/givemoney"}>
                 <SocialButton icon={IconBrandGithub} text="GitHub" />
               </Link>
               <Link to={"/givemoney"}>
                 <SocialButton icon={IconBrandGoogle} text="Google" />
               </Link>
-            </div>
+            </div> */}
           </form>
 
           <div className="text-center mt-6">
