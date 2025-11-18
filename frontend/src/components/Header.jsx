@@ -13,11 +13,11 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const scrolled = useScroll(10);
 
-  const links = [
-    { label: "Features", href: "/features" },
-    { label: "About", href: "/about" },
-    { label: "Settings", href: "/settings" },
-  ];
+  // const links = [
+  //   { label: "Featuresss", href: "/features" },
+  //   { label: "About", href: "/about" },
+  //   { label: "Settings", href: "/settings" },
+  // ];
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -45,7 +45,7 @@ export default function Header() {
 
         {/* Desktop links */}
         <div className="hidden items-center gap-2 md:flex">
-          {links.map((link, i) => (
+          {/* {links.map((link, i) => (
             <a
               className={cn(
                 buttonVariants({ variant: "ghost" }),
@@ -56,7 +56,7 @@ export default function Header() {
             >
               {link.label}
             </a>
-          ))}
+          ))} */}
           {!authUser ? (
             <>
               <Link to={"/login"}>
@@ -95,7 +95,7 @@ export default function Header() {
       {/* Mobile Menu */}
       <MobileMenu className="flex flex-col justify-between gap-2" open={open}>
         <div className="grid gap-y-2">
-          {links.map((link) => (
+          {/* {links.map((link) => (
             <a
               onClick={() => setOpen(false)}
               className={buttonVariants({
@@ -107,23 +107,43 @@ export default function Header() {
             >
               {link.label}
             </a>
-          ))}
+          ))} */}
         </div>
         <div className="flex flex-col gap-2">
-          <Link to={"/login"}>
-            <Button
-              className="w-full bg-transparent"
-              variant="outline"
-              onClick={() => setOpen(false)}
-            >
-              Sign In
-            </Button>
-          </Link>
-          <Link to={"/signup"}>
-            <Button className="w-full" onClick={() => setOpen(false)}>
-              Get Started
-            </Button>
-          </Link>
+          {!authUser ? (
+            <>
+              <Link to={"/login"}>
+                <Button
+                  className="w-full bg-transparent"
+                  variant="outline"
+                  onClick={() => setOpen(false)}
+                >
+                  Sign In
+                </Button>
+              </Link>
+              <Link to={"/signup"}>
+                <Button className="w-full" onClick={() => setOpen(false)}>
+                  Get Started
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to={"/"}>
+                <Button
+                  className="w-full bg-transparent"
+                  variant="outline"
+                  onClick={() => setOpen(false)}
+                >
+                  Chats
+                </Button>
+              </Link>
+              // todo: After logout close navbar in mobile
+              <Button className="w-full" onClick={logout}>
+                Logout
+              </Button>
+            </>
+          )}
         </div>
       </MobileMenu>
     </header>
